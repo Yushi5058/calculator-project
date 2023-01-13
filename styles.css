@@ -1,0 +1,58 @@
+* {
+    padding:0;
+    margin:0;
+    box-sizing: border-box;
+}
+
+h1 {
+    text-align:center;
+    font-size:2rem;
+    margin-top:1.125rem;
+    margin-bottom: 2em;
+}
+
+.monitor {
+    border:2px solid grey;
+}
+
+.monitor-display {
+    text-align:right;
+    margin-right:.5em;
+}
+
+.calculator-tool {
+    border:10px solid black;
+    min-width:300px;
+    width:50%;
+    margin:0 auto;
+    box-shadow: 10px solid black;
+}
+
+.container {
+    display:flex;
+}
+
+.operators, .numbers {
+    display:flex;
+    flex-direction: column;
+    width:350px;
+}
+
+.percentage-operator {
+    width:50%;
+}
+
+.division-operator {
+    width:50%;
+}
+
+.percentage-division {
+    display:flex;
+}
+
+.equal-operator {
+    width:100%;
+}
+
+.width {
+    width
