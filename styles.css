@@ -1,58 +1,62 @@
-* {
+*, *::before, *::after {
     padding:0;
     margin:0;
     box-sizing: border-box;
 }
 
-h1 {
-    text-align:center;
-    font-size:2rem;
-    margin-top:1.125rem;
-    margin-bottom: 2em;
+body {
+    background-color: black;
+    color:#FFFFFF;
 }
 
-.monitor {
-    border:2px solid grey;
+p {
+    text-align: right;
+    margin-right:1.5em;
+    margin-top:.8em;
+    font-size: 1.8rem;
 }
-
-.monitor-display {
-    text-align:right;
-    margin-right:.5em;
-}
-
-.calculator-tool {
-    border:10px solid black;
-    min-width:300px;
-    width:50%;
-    margin:0 auto;
-    box-shadow: 10px solid black;
-}
-
 .container {
-    display:flex;
-}
-
-.operators, .numbers {
+    max-width:300px;
+    min-height:300px;
+    border:2px solid #E0E0E0;
+    margin:10rem auto;
     display:flex;
     flex-direction: column;
-    width:350px;
 }
 
-.percentage-operator {
-    width:50%;
+.display {
+    width:300px;
+    height:100px;
+    border-bottom:2px solid #E0E0E0;
 }
 
-.division-operator {
-    width:50%;
-}
 
-.percentage-division {
+line {
     display:flex;
+    
 }
 
-.equal-operator {
-    width:100%;
+button {
+    background:#4A4A49;
+    color:#FFFFFF;
+    width:calc(100% / 5);
+    max-width:300px;
+    padding:2rem;
+    outline:none;
+    border:1px solid #E0E0E0;
+    float:left;
+    align-items: center;
+    justify-content: center;
 }
 
-.width {
-    width
+.side {
+    width:98px;
+}
+
+button :hover {
+    background-color: #4A4A49;
+    cursor:pointer;
+}
+
+
+
