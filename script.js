@@ -37,7 +37,7 @@ numbers.forEach((button) => {
         firstNumber += buttonValue;
         output.textContent = firstNumber;
        } else {
-        seoncdNumber += buttonValue;
+        secondNumber += buttonValue;
         output.textContent = firstNumber + operator + secondNumber;
        }
     });
@@ -46,7 +46,7 @@ numbers.forEach((button) => {
 operators.forEach((button) => {
     button.addEventListener('click', (event) => {
         operator = event.target.textContent;
-        output.textContent = firstNumber + operator;
+        output.textContent = firstNumber + operator + (secondNumber ? secondNumber : "");
     });
 });
 
@@ -66,8 +66,8 @@ equalSign.addEventListener('click', () => {
 
 function evaluateSinglePair() {
     if (firstNumber !== '' && secondNumber !== '' && operator !== '') {
-        firstNumber = parseFloat(firstNumber);
-        secondNumber = parseFloat(secondNumber);
+        firstNumber = parseFloat(firstNumber.toFixed(2));
+        secondNumber = parseFloat(secondNumber.toFixed(2));
         switch (operator) {
             case '+':
                 intermediateResult = firstNumber + secondNumber;
