@@ -9,6 +9,7 @@ let firstNumber = '';
 let secondNumber = '';
 let operator = '';
 let result = '';
+let intermediateResult = '';
 
 output.textContent = '0';
 
@@ -20,12 +21,15 @@ allClear.addEventListener('click', () => {
 });
 
 deleteNum.addEventListener('click', () => {
-    if (operator === '') {
-        firstNumber = firstNumber.substring(1);
-    /* } else if (operator === '+' || operator === '-' || operator === '*' || operator === '÷') {
-        operator = operator.substring(1); */
-    } else {
+    if (operator === '' && secondNumber === '') {
+        firstNumber = firstNumber.substring(1);  
+    } else if (operator !== '' && secondNumber !== '' ) {
         secondNumber = secondNumber.substring(1);
+    } else if (operator !=='' && secondNumber === '') {
+        operator = operator.substring(1);
+    }
+    else {
+        output.textContent = 'invalid input!';
     }
     output.textContent = firstNumber + operator + secondNumber;
 })
@@ -33,51 +37,64 @@ deleteNum.addEventListener('click', () => {
 numbers.forEach((button) => {
     button.addEventListener('click', (event) => {
         const buttonValue = event.target.textContent;
-        if (operator === '') {
-            firstNumber += buttonValue;
-            output.textContent = firstNumber;
-        } else {
-            secondNumber += buttonValue;
-            output.textContent = firstNumber + operator + secondNumber;
+       if (operator !== '') {
+        if (secondNumber.length > 0) {
+            evaluateSinglePair();
         }
+        secondNumber += buttonValue;
+        output.textContent = firstNumber + operator + secondNumber;
+       } else {
+        firstNumber += buttonValue;
+        output.textContent = firstNumber;
+       }
     });
 });
 
 operators.forEach((button) => {
     button.addEventListener('click', (event) => {
         operator = event.target.textContent;
-        output.textContent = operator;
+        output.textContent += operator;
     });
 });
 
 equalSign.addEventListener('click', () => {
     if (firstNumber !== '' && secondNumber !== '') {
-    firstNumber = parseFloat(firstNumber);
-    secondNumber = parseFloat(secondNumber);
-    switch (operator) {
-        case '+':
-            result = firstNumber + secondNumber;
-            break;
-        case '-':
-            result = firstNumber - secondNumber;
-            break;
-        case '*':
-            result = firstNumber * secondNumber;
-            break;
-        case '÷':
-            result = firstNumber / secondNumber;
-            break;
-        default:
-            result = 'Invalid operator';
+        evaluateSinglePair();
+        firstNumber = intermediateResult.toString();
+        secondNumber = '';
+        operator = '';
+    } else {
+        output.textContent = 'Invalid input';
     }
-    output.textContent = result.toString();
-    firstNumber = result;
-    secondNumber = '';
-    operator = '';
-} else {
-    output.textContent = 'Invalid input';
-}
+
 });
+
+
+function evaluateSinglePair() {
+    if (firstNumber !== '' && secondNumber !== '' && operator !== '') {
+        firstNumber = parseFloat(firstNumber);
+        secondNumber = parseFloat(secondNumber);
+        switch (operator) {
+            case '+':
+                intermediateResult = firstNumber + secondNumber;
+                break;
+            case '-':
+                intermediateResult = firstNumber - secondNumber;
+                break;
+            case '*':
+                intermediateResult = firstNumber * secondNumber;
+                break;
+            case '÷':
+                intermediateResult = firstNumber / secondNumber;
+                break;
+            default:
+                intermediateResult = 'Invalid operator';
+        }
+        output.textContent = intermediateResult.toString();
+    } else {
+        output.textContent = 'Invalid input';
+    }
+}
  
 
 
