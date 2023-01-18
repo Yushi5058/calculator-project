@@ -4,11 +4,9 @@ const allClear = document.querySelector('.clear');
 const deleteNum = document.querySelector('.delete');
 const equalSign = document.querySelector('.equal');
 const output = document.getElementById('output');
-let outputValue = '';
 let firstNumber = '';
 let secondNumber = '';
 let operator = '';
-let result = '';
 let intermediateResult = '';
 
 output.textContent = '0';
@@ -21,15 +19,13 @@ allClear.addEventListener('click', () => {
 });
 
 deleteNum.addEventListener('click', () => {
-    if (operator === '' && secondNumber === '') {
-        firstNumber = firstNumber.substring(1);  
-    } else if (operator !== '' && secondNumber !== '' ) {
-        secondNumber = secondNumber.substring(1);
-    } else if (operator !=='' && secondNumber === '') {
-        operator = operator.substring(1);
+    if (secondNumber !== '') {
+        secondNumber = secondNumber.substring(0, secondNumber.length - 1);
+    } else if (operator !=='') {
+        operator = operator.substring(0, operator.length - 1);
     }
     else {
-        output.textContent = 'invalid input!';
+        firstNumber = firstNumber.substring(0, firstNumber.length - 1);
     }
     output.textContent = firstNumber + operator + secondNumber;
 })
@@ -37,15 +33,12 @@ deleteNum.addEventListener('click', () => {
 numbers.forEach((button) => {
     button.addEventListener('click', (event) => {
         const buttonValue = event.target.textContent;
-       if (operator !== '') {
-        if (secondNumber.length > 0) {
-            evaluateSinglePair();
-        }
-        secondNumber += buttonValue;
-        output.textContent = firstNumber + operator + secondNumber;
-       } else {
+       if (firstNumber === '') {
         firstNumber += buttonValue;
         output.textContent = firstNumber;
+       } else {
+        seoncdNumber += buttonValue;
+        output.textContent = firstNumber + operator + secondNumber;
        }
     });
 });
@@ -53,13 +46,14 @@ numbers.forEach((button) => {
 operators.forEach((button) => {
     button.addEventListener('click', (event) => {
         operator = event.target.textContent;
-        output.textContent += operator;
+        output.textContent = firstNumber + operator;
     });
 });
 
 equalSign.addEventListener('click', () => {
-    if (firstNumber !== '' && secondNumber !== '') {
+    if (firstNumber !== '' && secondNumber !== '' && operator !== '') {
         evaluateSinglePair();
+        output.textContent = intermediateResult;
         firstNumber = intermediateResult.toString();
         secondNumber = '';
         operator = '';
@@ -90,9 +84,8 @@ function evaluateSinglePair() {
             default:
                 intermediateResult = 'Invalid operator';
         }
-        output.textContent = intermediateResult.toString();
     } else {
-        output.textContent = 'Invalid input';
+       intermediateResult = 'Invalid input';
     }
 }
  
