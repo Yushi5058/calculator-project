@@ -51,52 +51,37 @@ operators.forEach((button) => {
 });
 
 equalSign.addEventListener('click', () => {
+    if (firstNumber !== '' && secondNumber !== '') {
     firstNumber = parseFloat(firstNumber);
     secondNumber = parseFloat(secondNumber);
-    operate(operator, firstNumber, secondNumber);
+    switch (operator) {
+        case '+':
+            result = firstNumber + secondNumber;
+            break;
+        case '-':
+            result = firstNumber - secondNumber;
+            break;
+        case '*':
+            result = firstNumber * secondNumber;
+            break;
+        case '÷':
+            result = firstNumber / secondNumber;
+            break;
+        default:
+            result = 'Invalid operator';
+    }
+    output.textContent = result.toString();
     firstNumber = result;
     secondNumber = '';
     operator = '';
+} else {
+    output.textContent = 'Invalid input';
+}
 });
+ 
 
 
 
-
-
-
-function add(firstNumber, secondNumber) {
-    return firstNumber + secondNumber;
-}
-function substract(firstNumber, secondNumber) {
-    return firstNumber - secondNumber;
-}
-function multiply(firstNumber, secondNumber) {
-    return firstNumber * secondNumber;
-}
-function divide(firstNumber, secondNumber) {
-    return firstNumber / secondNumber;
-}
-
-function operate(operator,firstNumber, secondNumber) {
-    let result;
-    switch (operator) {
-        case '+' :
-           result = add(firstNumber, secondNumber);
-            break;
-        case '-' :
-           result = substract(firstNumber, secondNumber);
-            break;
-        case '*' :
-           result = multiply(firstNumber, secondNumber);
-            break;
-        case '÷':
-           result = divide(firstNumber, secondNumber);
-            break;
-        default:
-           result = 'Invalid operator';
-        }
-        output.textContent = result;
-}
 
 
 
