@@ -63,7 +63,7 @@ numbers.forEach((button) => {
 
 
 
-operators.forEach((button) => {
+/* operators.forEach((button) => {
     button.addEventListener('click', (event) => {
         if(parseFloat(firstNumber) !== '' && !operatorPressed) {
             operator = event.target.textContent;
@@ -71,8 +71,24 @@ operators.forEach((button) => {
             output.textContent = firstNumber + operator;
         }
     });
-});
+}); */
 
+operators.forEach((button) => {
+    button.addEventListener('click', (event) => {
+        if(firstNumber !== '' && secondNumber !== '' && operator !== '') {
+             evaluateSinglePair();
+            firstNumber = intermediateResult;
+            operator = event.target.textContent;
+            operatorPressed = true;
+            output.textContent = firstNumber + operator;
+
+        } else if (firstNumber !== '') {
+            operator = event.target.textContent;
+            operatorPressed = true;
+            output.textContent = firstNumber + operator;
+        }
+    })
+})
 
 
 equalSign.addEventListener('click', () => {
@@ -81,6 +97,13 @@ equalSign.addEventListener('click', () => {
         output.textContent = intermediateResult;
         secondNumber = '';
         operator = '';
+        operatorPressed = false;
+    } else if (firstNumber !== '' && operator !== '' && secondNumber !== '' && this.clicked != true) {
+        evaluateSinglePair();
+        output.textContent = intermediateResult;
+        firstNumber = intermediateResult;
+        secondNumber = '';
+        operator = ''
         operatorPressed = false;
     } else if (firstNumber === '' && secondNumber === '' && operator === ''){
         output.textContent = 'Input is empty';
@@ -114,6 +137,6 @@ function evaluateSinglePair() {
     }
     firstNumber = intermediateResult;
     secondNumber = '';
-}
+    }
 
 
