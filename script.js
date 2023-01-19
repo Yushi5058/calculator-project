@@ -18,24 +18,23 @@ allClear.addEventListener('click', () => {
         firstNumber = '';
         secondNumber = '';
         operator = '';
-        operatorPressed = false;
         intermediateResult = '';
         output.textContent = '';
+        decimalPressed = false;
+        operatorPressed = false;
 });
 
-/* deleteNum.addEventListener('click', () => {
-    if (secondNumber !== '' && secondNumber.length > 0) {
+deleteNum.addEventListener('click', () => {
+     if (secondNumber !== '' && secondNumber.length > 0) {
         secondNumber = secondNumber.substring(0, secondNumber.length - 1);
     } else if (operator !=='') {
         operator = operator.substring(0, operator.length - 1);
     }
     else if (firstNumber !== '' && firstNumber.length > 0) {
         firstNumber = firstNumber.substring(0, firstNumber.length - 1);
-    } else {
-        firstNumber = firstNumber.substring(0, firstNumber);
-    }
+    };
     output.textContent = firstNumber + operator + secondNumber;
-}); */
+});
 
 
 numbers.forEach((button) => {
@@ -73,13 +72,13 @@ operators.forEach((button) => {
              evaluateSinglePair();
             firstNumber = intermediateResult;
             operator = event.target.textContent;
-            operatorPressed = true;
             output.textContent = firstNumber + operator;
+            operatorPressed = true;
 
         } else if (firstNumber !== '') {
             operator = event.target.textContent;
-            operatorPressed = true;
             output.textContent = firstNumber + operator;
+            operatorPressed = true;
         }
     })
 })
@@ -88,16 +87,16 @@ operators.forEach((button) => {
 equalSign.addEventListener('click', () => {
     if (firstNumber !== '' && secondNumber !== '' && operator !== '') {
         evaluateSinglePair();
-        output.textContent = intermediateResult;
         secondNumber = '';
         operator = '';
+        output.textContent = intermediateResult;
         operatorPressed = false;
     } else if (firstNumber !== '' && operator !== '' && secondNumber !== '' && this.clicked != true) {
         evaluateSinglePair();
-        output.textContent = intermediateResult;
         firstNumber = intermediateResult;
         secondNumber = '';
         operator = ''
+        output.textContent = intermediateResult;
         operatorPressed = false;
     } else if (firstNumber === '' && secondNumber === '' && operator === ''){
         output.textContent = 'Input is empty';
@@ -127,7 +126,11 @@ function evaluateSinglePair() {
             intermediateResult = 'Invalid operator';
     }
     if (firstNumber.toString().includes('.') || secondNumber.toString().includes('.')) {
+        if (intermediateResult % 1 == 0 ) {
+            intermediateResult = intermediateResult;
+        } else {
         intermediateResult = intermediateResult.toFixed(2);
+        }
     } 
     if (operator === '÷' && secondNumber === 0) {
         intermediateResult = 'ERROR'
@@ -135,5 +138,3 @@ function evaluateSinglePair() {
     firstNumber = intermediateResult;
     secondNumber = '';
     }
-
-
