@@ -9,6 +9,7 @@ let secondNumber = '';
 let operator = '';
 let intermediateResult = '';
 let operatorPressed = false;
+let decimalPressed = false;
 
 output.textContent = '';
 outputResetValue = output.textContent;
@@ -40,6 +41,11 @@ allClear.addEventListener('click', () => {
 numbers.forEach((button) => {
     button.addEventListener('click', (event) => {
         const buttonValue = event.target.textContent;
+        if (buttonValue === '.') {
+            if((firstNumber === '' && secondNumber === '') || (firstNumber.includes('.') && operatorPressed === false) || (secondNumber.includes('.') && operatorPressed === true) || (firstNumber.includes('.') && operatorPressed === true && secondNumber === '')) {
+                return;
+            }
+        }
         if (firstNumber === '') {
             if (firstNumber.length < 5) {
                 firstNumber += buttonValue;
@@ -60,18 +66,6 @@ numbers.forEach((button) => {
         }
     });
 });
-
-
-
-/* operators.forEach((button) => {
-    button.addEventListener('click', (event) => {
-        if(parseFloat(firstNumber) !== '' && !operatorPressed) {
-            operator = event.target.textContent;
-            operatorPressed = true;
-            output.textContent = firstNumber + operator;
-        }
-    });
-}); */
 
 operators.forEach((button) => {
     button.addEventListener('click', (event) => {
@@ -132,6 +126,9 @@ function evaluateSinglePair() {
         default:
             intermediateResult = 'Invalid operator';
     }
+    if (firstNumber.toString().includes('.') || secondNumber.toString().includes('.')) {
+        intermediateResult = intermediateResult.toFixed(2);
+    } 
     if (operator === '÷' && secondNumber === 0) {
         intermediateResult = 'ERROR'
     }
