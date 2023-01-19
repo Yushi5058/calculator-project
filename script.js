@@ -1,4 +1,5 @@
 const numbers = document.querySelectorAll('.numbers');
+const digits = Array.from(numbers);
 const operators = document.querySelectorAll('.operators');
 const allClear = document.querySelector('.clear');
 const deleteNum = document.querySelector('.delete');
@@ -13,6 +14,14 @@ let decimalPressed = false;
 
 output.textContent = '';
 outputResetValue = output.textContent;
+
+
+window.addEventListener('keydown', function(e){
+    const key = document.querySelector(`button[data-key='${e.key}']`);
+    key.click();
+});
+
+
 
 allClear.addEventListener('click', () => {
         firstNumber = '';
