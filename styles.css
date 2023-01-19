@@ -9,6 +9,13 @@ body {
     background-color: lightgoldenrodyellow;
 }
 
+h1 {
+    text-align: center;
+    font-weight: bold;
+    text-decoration: underline;
+    
+}
+
 .calculator-grid {
     display:grid;
     min-height:100vh;
