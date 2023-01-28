@@ -12,3 +12,5 @@ You can see the live preview of the project [here](https://yushi5058.github.io/c
 
 ### Conclusion
 
+In conclusion, building this functional calculator was a great learning experience. I was able to improve my understanding of how to use parseFloat in JavaScript and to correct bugs. I also gained experience in creating interactive web pages using HTML, CSS and JavaScript. The final product is a functional and responsive calculator that can perform basic mathematical operations. Overall, I am pleased with the final result and I am proud of the time and effort I put into making this project a success.
+
